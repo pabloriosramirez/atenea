@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Random;
 
 @Component
-public class MatrizServiceActivator implements Activator {
+public class SimulatorBureauServiceActivator implements Activator {
 
     public Map<String, Object> invoke(@Payload Map<String, Object> payload, @Headers Map<String, Object> header) {
         Map<String, Object> attribute = new HashMap<>();
