@@ -1,28 +1,24 @@
 package online.grisk.atenea.controller;
 
-import online.grisk.atenea.integration.gateway.GatewayService;
+import online.grisk.atenea.integration.activator.impl.SimulatorBureauServiceActivator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
-import java.util.HashMap;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Map;
-import java.util.UUID;
 
 @RestController
 public class MainController {
+
     @Autowired
-    GatewayService gatewayService;
+    SimulatorBureauServiceActivator simulatorBureauServiceActivator;
 
     @PostMapping(value = "/api/atenea/report")
-    public Map<String, Object> report(@RequestBody Map payload) {
-        HashMap<String, Object> response = new HashMap<>();
-        response.put("uuid", UUID.randomUUID());
-        response.put("timestamp", new Date());
-        response.put("request", payload);
-        return gatewayService.process(MessageBuilder.withPayload(response).build());
+    public Map<String, Object> report(@NotEmpty @RequestBody Map<String, Object> payload, @NotNull @RequestHeader Map headers) throws Exception {
+        return simulatorBureauServiceActivator.invokeProcessDataIntegration(payload, headers);
     }
 }
