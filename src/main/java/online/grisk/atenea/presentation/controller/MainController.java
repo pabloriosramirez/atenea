@@ -1,4 +1,4 @@
-package online.grisk.atenea.controller;
+package online.grisk.atenea.presentation.controller;
 
 import online.grisk.atenea.integration.activator.impl.SimulatorBureauServiceActivator;
 import org.springframework.beans.factory.annotation.Autowired;
