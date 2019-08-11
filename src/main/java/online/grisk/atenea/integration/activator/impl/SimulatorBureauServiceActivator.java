@@ -25,7 +25,7 @@ public class SimulatorBureauServiceActivator {
         DataIntegration configuration = objectMapper.convertValue(((Map) payload.get("dataintegration")).get("configuration"), DataIntegration.class);
         if (configuration.isBureau()) {
             Map<String, Object> responseBureau = simulatorBureauService.invokeReportDataIntegrationBureau(payload, headers);
-            payload.put("values", simulatorBureauService.extractVariables(responseBureau, new ArrayList(configuration.getVariableCollection())));
+            ((Map) payload.get("dataintegration")).put("values", simulatorBureauService.extractVariables(responseBureau, new ArrayList(configuration.getVariableCollection())));
         }
         return payload;
     }
