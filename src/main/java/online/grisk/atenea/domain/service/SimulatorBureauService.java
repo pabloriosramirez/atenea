@@ -38,7 +38,7 @@ public class SimulatorBureauService {
         for (Variable variable : variableCollection) {
             Map<String, Object> value = new HashMap<>();
             value.put("code", variable.getCode());
-            value.put("type", variable.getTypeVariable().getName());
+            value.put("type", variable.getTypeVariable().getCode());
             value.put("value", attributes.get(variable.getCode()).toString());
             value.put("isValueDefault", false);
             values.add(value);
