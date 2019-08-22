@@ -37,9 +37,13 @@ public class SimulatorBureauService {
         Map attributes = (Map) ((Map) ((Map) responseBureau.get("bureau")).get("applicant")).get("attribute");
         for (Variable variable : variableCollection) {
             Map<String, Object> value = new HashMap<>();
-            value.put("code", variable.getCode());
+            value.put("code", variable.getCode().toUpperCase());
             value.put("type", variable.getTypeVariable().getCode());
-            value.put("value", attributes.get(variable.getCode()).toString());
+            try {
+                value.put("value", attributes.get(variable.getCode().toLowerCase()).toString());
+            } catch (Exception e) {
+                System.out.println(variable.getCode().toLowerCase());
+            }
             value.put("isValueDefault", false);
             values.add(value);
         }
